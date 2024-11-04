@@ -1,8 +1,7 @@
 package al.project.shorturl.shorturlgenerator.security;
 
-import al.project.shorturl.shorturlgenerator.model.User;
+import al.project.shorturl.shorturlgenerator.entity.User;
 import al.project.shorturl.shorturlgenerator.repository.UserRepository;
-import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.MacAlgorithm;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.crypto.SecretKey;
 import java.util.Date;

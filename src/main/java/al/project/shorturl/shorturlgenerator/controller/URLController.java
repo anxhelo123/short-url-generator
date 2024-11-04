@@ -1,7 +1,7 @@
 package al.project.shorturl.shorturlgenerator.controller;
 
 import al.project.shorturl.shorturlgenerator.exceptions.NotFoundException;
-import al.project.shorturl.shorturlgenerator.model.ShortenUrlRequest;
+import al.project.shorturl.shorturlgenerator.entity.ShortenUrlRequest;
 import al.project.shorturl.shorturlgenerator.service.URLService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/url")
 public class URLController {
+
     @Autowired
     private URLService urlService;
 

@@ -1,7 +1,8 @@
-package al.project.shorturl.shorturlgenerator.model;
+package al.project.shorturl.shorturlgenerator.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 @Entity
 @Getter
 @Setter
+@RequiredArgsConstructor
 @Table(name = "app_user")
 public class User {
     @Id
@@ -28,9 +30,6 @@ public class User {
     public <E> User(String username, String s, ArrayList<E> es) {
     }
 
-    public User() {
-
-    }
 
 }
 

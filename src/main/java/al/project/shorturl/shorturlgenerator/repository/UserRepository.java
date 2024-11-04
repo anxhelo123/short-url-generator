@@ -1,6 +1,6 @@
 package al.project.shorturl.shorturlgenerator.repository;
 
-import al.project.shorturl.shorturlgenerator.model.User;
+import al.project.shorturl.shorturlgenerator.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

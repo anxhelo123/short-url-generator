@@ -1,6 +1,6 @@
 package al.project.shorturl.shorturlgenerator.repository;
 
-import al.project.shorturl.shorturlgenerator.model.URL;
+import al.project.shorturl.shorturlgenerator.entity.URL;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.*;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.jar.JarInputStream;
 
 @Repository
 public interface URLRepository extends JpaRepository<URL, Long> {

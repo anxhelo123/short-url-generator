@@ -2,7 +2,7 @@ package al.project.shorturl.shorturlgenerator.controller;
 
 import al.project.shorturl.shorturlgenerator.config.TestSecurityConfig;
 import al.project.shorturl.shorturlgenerator.exceptions.NotFoundException;
-import al.project.shorturl.shorturlgenerator.model.ShortenUrlRequest;
+import al.project.shorturl.shorturlgenerator.entity.ShortenUrlRequest;
 import al.project.shorturl.shorturlgenerator.service.URLService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

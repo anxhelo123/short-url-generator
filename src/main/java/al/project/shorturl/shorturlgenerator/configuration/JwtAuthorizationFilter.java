@@ -1,6 +1,6 @@
 package al.project.shorturl.shorturlgenerator.configuration;
 
-import al.project.shorturl.shorturlgenerator.model.User;
+import al.project.shorturl.shorturlgenerator.entity.User;
 import al.project.shorturl.shorturlgenerator.security.AuthenticationService;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;

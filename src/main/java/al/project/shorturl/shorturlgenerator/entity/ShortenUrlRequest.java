@@ -1,4 +1,4 @@
-package al.project.shorturl.shorturlgenerator.model;
+package al.project.shorturl.shorturlgenerator.entity;
 
 import jakarta.validation.constraints.NotNull;
 

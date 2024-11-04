@@ -1,8 +1,7 @@
 package al.project.shorturl.shorturlgenerator.service;
 
-import al.project.shorturl.shorturlgenerator.model.URL;
+import al.project.shorturl.shorturlgenerator.entity.URL;
 import al.project.shorturl.shorturlgenerator.repository.URLRepository;
-import al.project.shorturl.shorturlgenerator.service.URLService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

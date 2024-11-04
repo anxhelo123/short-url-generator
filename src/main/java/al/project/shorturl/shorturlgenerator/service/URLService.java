@@ -1,9 +1,10 @@
 package al.project.shorturl.shorturlgenerator.service;
 
 import al.project.shorturl.shorturlgenerator.exceptions.NotFoundException;
-import al.project.shorturl.shorturlgenerator.model.URL;
+import al.project.shorturl.shorturlgenerator.entity.URL;
 import al.project.shorturl.shorturlgenerator.repository.URLRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,16 @@ import java.util.*;
 
 @Service
 public class URLService {
+
+    @Value("${url.expiration.default-duration}")
+    private int defaultExpirationDuration;
+
     @Autowired
     private URLRepository urlRepository;
 
     public String shortenURL(String longUrl, Optional<Integer> expirationMinutes) {
+        URL url = new URL();
+
         Optional<URL> existingUrl = urlRepository.findByOriginalUrl(longUrl);
 
         if (existingUrl.isPresent()) {
@@ -27,12 +34,14 @@ public class URLService {
         }
 
         String shortUrl = encodeBase64(longUrl);
-        LocalDateTime expirationTime = LocalDateTime.now().plusMinutes(expirationMinutes.orElse(5));
-
-        URL url = new URL(longUrl, shortUrl, expirationTime, 0);
+        LocalDateTime expirationTime = LocalDateTime.now().plusMinutes(expirationMinutes.orElse(defaultExpirationDuration));
+        url.setOriginalUrl(longUrl);
+        url.setShortUrl(shortUrl);
+        url.setCreationTime(LocalDateTime.now());
+        url.setExpirationTime(expirationTime);
         urlRepository.save(url);
 
-        return shortUrl;
+        return url.getShortUrl();
     }
 
     public String getOriginalURL(String shortUrl) throws ChangeSetPersister.NotFoundException, NotFoundException {
@@ -44,6 +53,13 @@ public class URLService {
             throw new ChangeSetPersister.NotFoundException();
         }
 
+        LocalDateTime expirationTime = url.getExpirationTime();
+
+        if (LocalDateTime.now().isAfter(expirationTime)) {
+            urlRepository.delete(url); // Delete the expired URL
+            throw new NotFoundException("URL has expired");
+        }
+
         url.setClickCount(url.getClickCount() + 1);
         urlRepository.save(url);
 
@@ -51,7 +67,7 @@ public class URLService {
     }
 
     public void resetExpiration(String shortUrl) {
-        LocalDateTime newExpirationTime = LocalDateTime.now().plusMinutes(5);
+        LocalDateTime newExpirationTime = LocalDateTime.now().plusMinutes(defaultExpirationDuration);
         urlRepository.updateExpirationTime(shortUrl, newExpirationTime);
     }
 
